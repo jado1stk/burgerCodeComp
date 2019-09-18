@@ -1,0 +1,170 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */
+options
+{
+  static = true;
+  LOOKAHEAD = 2;
+}
+
+PARSER_BEGIN(burgercode)
+
+public class burgercode
+{
+  public static void main(String args []) throws ParseException
+  {
+    burgercode parser = new burgercode(System.in);
+    while (true)
+    {
+      
+     
+      try
+      {
+        System.out.println("O que vai ser hoje?:\n");
+        parser.principal();
+      }
+      catch (Exception e)
+      {
+        System.out.println("Me desculpa. Isso nunca aconteceu antes.");
+        System.out.println(e.getMessage());
+        burgercode.ReInit(System.in);
+      }
+      catch (Error e)
+      {
+        System.out.println("Opa.");
+        System.out.println(e.getMessage());
+        break;
+      }
+    }
+  }
+}
+
+PARSER_END(burgercode)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN : /* ATRIBUIÇÕES */
+{
+  < INICIOPROGRAMA 	: "liga" >
+| < INICIOBLOCO 	: "prepara" >
+| < FIMBLOCO 		: "entrega" >
+| < REAL			: "xtudo" >
+| < INTEIRO			: "xsalada" >
+| < LETRA			: "hamburguer" >
+| < FIMINSTRUCAO	: "prensou" >
+| < IDENTIFICADOR	: "cliente_"(< CARACTERE >|< DIGITO >)+ >
+| < DIGITO			: ["0"-"9"] >
+| < NUMERO 			: (< DIGITO >)+ >
+| < CARACTERE		: (["A"- "Z"] | ["a" - "z"]) >
+| < ATRIBUICAO		: "adiciona" >
+| < IF				: "se" >
+| < FIMIF			: "fimse" >
+| < FOR				: "para" >
+| < DO				: "fazer" >
+| < WHILE			: "enquanto" >
+| < PARA			: "ate" >
+| < PRINT			: "mostra" >
+}
+
+TOKEN : /* OPERADORES */
+{
+	< SOMA 			: "+"  >
+| 	< SUBTRACAO		: "-"  >
+| 	< MULTIPLICACAO	: "*"  >
+| 	< DIVISAO		: "/"  >
+|   < ABRECHAVE		: "{"  >
+| 	< FECHACHAVE	: "}"  >
+| 	< ABREPAR		: "("  >
+| 	< FECHAPAR		: ")"  >
+| 	< NEGACAO		: "!=" >
+|   < IGUALIGUAL	: "==" >
+| 	< IGUAL			: "="  >
+| 	< MENORIGUAL	: "<=" >
+| 	< MAIORIGUAL	: ">=" >
+}
+
+void principal() :
+{}
+{
+  < INICIOPROGRAMA > < INICIOBLOCO >
+	(  declaracaoVariavel())*
+|
+	(	repeticaoFor())*
+  < FIMBLOCO >
+}
+
+void declaracaoVariavel() :
+{}
+{
+  tipoDado() <IDENTIFICADOR >(< ATRIBUICAO > (< CARACTERE > | < NUMERO >))?
+  <FIMINSTRUCAO >
+}
+
+void tipoDado() :
+{}
+{
+   < REAL > | < INTEIRO > | < LETRA >
+}
+
+ 
+void printarVariavel() :
+{
+	Token t;
+}
+{
+    (t=< IDENTIFICADOR > { System.out.println("Este é o " + t.image); })
+}
+
+
+
+void condicionalSe() :
+{
+}
+{
+  < IF > < ABRECHAVE > condicao()< FECHACHAVE > <ABREPAR > expressao() < FIMINSTRUCAO > < FECHAPAR > < FIMIF >
+}
+
+void condicao() :
+{ 
+}
+{
+  (< IDENTIFICADOR >)+ (< NEGACAO >|< IGUALIGUAL >) ((< IDENTIFICADOR >)+ | (< DIGITO >)+)
+}
+
+void expressao() :
+{
+}
+{
+  (< IDENTIFICADOR >)+ < ATRIBUICAO > ((< IDENTIFICADOR >)+ | (< DIGITO >)+ | conta())
+}
+
+void conta() :
+{
+}
+{
+ ((< IDENTIFICADOR >)+ < SOMA > ((< IDENTIFICADOR >)+ | (< DIGITO >)+))
+| ((< IDENTIFICADOR >)+ < SUBTRACAO > ((< IDENTIFICADOR >)+ | (< DIGITO >)+))
+| ((< IDENTIFICADOR >)+ < MULTIPLICACAO > ((< IDENTIFICADOR >)+ | (< DIGITO >)+))
+| ((< IDENTIFICADOR >)+ < DIVISAO > ((< IDENTIFICADOR >)+ | (< DIGITO >)+))
+}
+
+void repeticaoFor()	:
+{
+}
+{
+  < FOR > (< IDENTIFICADOR >)+ < IGUAL > < DIGITO > < PARA > (< DIGITO >)+  < ABREPAR > condicao() < FIMINSTRUCAO > < FECHAPAR >
+}
+
+
+void repeticaoDo()  :
+{
+}
+{
+  < DO > < ABREPAR > expressao() < FIMINSTRUCAO > < FECHAPAR > < WHILE > <ABRECHAVE > condicao() < FECHACHAVE > <FIMINSTRUCAO >
+}

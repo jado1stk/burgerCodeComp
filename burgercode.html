@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<TITLE>BNF for burgercode.jj </TITLE>
+</HEAD>
+<BODY>
+<H1 ALIGN=CENTER>BNF for burgercode.jj </H1>
+<H2 ALIGN=CENTER>TOKENS</H2>
+<TABLE>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; SKIP : {
+" "
+| "\r"
+| "\t"
+| "\n"
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; TOKEN : {
+&lt;INICIOPROGRAMA: "liga"&gt;
+| &lt;INICIOBLOCO: "prepara"&gt;
+| &lt;FIMBLOCO: "entrega"&gt;
+| &lt;REAL: "xtudo"&gt;
+| &lt;INTEIRO: "xsalada"&gt;
+| &lt;LETRA: "hamburguer"&gt;
+| &lt;FIMINSTRUCAO: "prensou"&gt;
+| &lt;IDENTIFICADOR: "cliente_" (&lt;CARACTERE&gt; | &lt;DIGITO&gt;)+&gt;
+| &lt;DIGITO: ["0"-"9"]&gt;
+| &lt;NUMERO: (&lt;DIGITO&gt;)+&gt;
+| &lt;CARACTERE: ["A"-"Z"] | ["a"-"z"]&gt;
+| &lt;ATRIBUICAO: "adiciona"&gt;
+| &lt;IF: "se"&gt;
+| &lt;FIMIF: "fimse"&gt;
+| &lt;FOR: "para"&gt;
+| &lt;DO: "fazer"&gt;
+| &lt;WHILE: "enquanto"&gt;
+| &lt;PARA: "ate"&gt;
+| &lt;PRINT: "mostra"&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; TOKEN : {
+&lt;SOMA: "+"&gt;
+| &lt;SUBTRACAO: "-"&gt;
+| &lt;MULTIPLICACAO: "*"&gt;
+| &lt;DIVISAO: "/"&gt;
+| &lt;ABRECHAVE: "{"&gt;
+| &lt;FECHACHAVE: "}"&gt;
+| &lt;ABREPAR: "("&gt;
+| &lt;FECHAPAR: ")"&gt;
+| &lt;NEGACAO: "!="&gt;
+| &lt;IGUALIGUAL: "=="&gt;
+| &lt;IGUAL: "="&gt;
+| &lt;MENORIGUAL: "&lt;="&gt;
+| &lt;MAIORIGUAL: "&gt;="&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+</TABLE>
+<H2 ALIGN=CENTER>NON-TERMINALS</H2>
+<TABLE>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod1">principal</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;INICIOPROGRAMA&gt; &lt;INICIOBLOCO&gt; ( <A HREF="#prod2">declaracaoVariavel</A> )*</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( <A HREF="#prod3">repeticaoFor</A> )* &lt;FIMBLOCO&gt;</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod2">declaracaoVariavel</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE><A HREF="#prod4">tipoDado</A> &lt;IDENTIFICADOR&gt; ( &lt;ATRIBUICAO&gt; ( &lt;CARACTERE&gt; | &lt;NUMERO&gt; ) )? &lt;FIMINSTRUCAO&gt;</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod4">tipoDado</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;REAL&gt;</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;INTEIRO&gt;</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;LETRA&gt;</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod5">printarVariavel</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;IDENTIFICADOR&gt; )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod6">condicionalSe</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;IF&gt; &lt;ABRECHAVE&gt; <A HREF="#prod7">condicao</A> &lt;FECHACHAVE&gt; &lt;ABREPAR&gt; <A HREF="#prod8">expressao</A> &lt;FIMINSTRUCAO&gt; &lt;FECHAPAR&gt; &lt;FIMIF&gt;</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod7">condicao</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;IDENTIFICADOR&gt; )+ ( &lt;NEGACAO&gt; | &lt;IGUALIGUAL&gt; ) ( ( &lt;IDENTIFICADOR&gt; )+ | ( &lt;DIGITO&gt; )+ )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod8">expressao</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;IDENTIFICADOR&gt; )+ &lt;ATRIBUICAO&gt; ( ( &lt;IDENTIFICADOR&gt; )+ | ( &lt;DIGITO&gt; )+ | <A HREF="#prod9">conta</A> )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod9">conta</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;IDENTIFICADOR&gt; )+ &lt;SOMA&gt; ( ( &lt;IDENTIFICADOR&gt; )+ | ( &lt;DIGITO&gt; )+ ) )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;IDENTIFICADOR&gt; )+ &lt;SUBTRACAO&gt; ( ( &lt;IDENTIFICADOR&gt; )+ | ( &lt;DIGITO&gt; )+ ) )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;IDENTIFICADOR&gt; )+ &lt;MULTIPLICACAO&gt; ( ( &lt;IDENTIFICADOR&gt; )+ | ( &lt;DIGITO&gt; )+ ) )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;IDENTIFICADOR&gt; )+ &lt;DIVISAO&gt; ( ( &lt;IDENTIFICADOR&gt; )+ | ( &lt;DIGITO&gt; )+ ) )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod3">repeticaoFor</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;FOR&gt; ( &lt;IDENTIFICADOR&gt; )+ &lt;IGUAL&gt; &lt;DIGITO&gt; &lt;PARA&gt; ( &lt;DIGITO&gt; )+ &lt;ABREPAR&gt; <A HREF="#prod7">condicao</A> &lt;FIMINSTRUCAO&gt; &lt;FECHAPAR&gt;</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod10">repeticaoDo</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;DO&gt; &lt;ABREPAR&gt; <A HREF="#prod8">expressao</A> &lt;FIMINSTRUCAO&gt; &lt;FECHAPAR&gt; &lt;WHILE&gt; &lt;ABRECHAVE&gt; <A HREF="#prod7">condicao</A> &lt;FECHACHAVE&gt; &lt;FIMINSTRUCAO&gt;</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>
