@@ -166,5 +166,5 @@ void repeticaoDo()  :
 {
 }
 {
-  < DO> < ABREPAR > expressao() < FIMINSTRUCAO > < FECHAPAR > < WHILE > <ABRECHAVE > condicao() < FECHACHAVE > <FIMINSTRUCAO >
+  < DO > < ABREPAR > expressao() < FIMINSTRUCAO > < FECHAPAR > < WHILE > <ABRECHAVE > condicao() < FECHACHAVE > <FIMINSTRUCAO >
 }
