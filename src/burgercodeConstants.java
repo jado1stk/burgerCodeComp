@@ -68,10 +68,6 @@ public interface burgercodeConstants {
   int IGUALIGUAL = 33;
   /** RegularExpression Id. */
   int IGUAL = 34;
-  /** RegularExpression Id. */
-  int MENORIGUAL = 35;
-  /** RegularExpression Id. */
-  int MAIORIGUAL = 36;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -113,8 +109,6 @@ public interface burgercodeConstants {
     "\"!=\"",
     "\"==\"",
     "\"=\"",
-    "\"<=\"",
-    "\">=\"",
   };
 
 }

@@ -5,6 +5,7 @@ options
 {
   static = true;
   LOOKAHEAD = 2;
+  FORCE_LA_CHECK = true;
 }
 
 PARSER_BEGIN(burgercode)
@@ -16,11 +17,10 @@ public class burgercode
     burgercode parser = new burgercode(System.in);
     while (true)
     {
-      
+      System.out.println("O que vai ser hoje?:\n");
      
       try
       {
-        System.out.println("O que vai ser hoje?:\n");
         parser.principal();
       }
       catch (Exception e)
@@ -28,6 +28,7 @@ public class burgercode
         System.out.println("Me desculpa. Isso nunca aconteceu antes.");
         System.out.println(e.getMessage());
         burgercode.ReInit(System.in);
+        break;
       }
       catch (Error e)
       {
@@ -49,7 +50,7 @@ SKIP :
 | "\n"
 }
 
-TOKEN : /* ATRIBUIÇÕES */
+TOKEN : /* ATRIBUIï¿½ï¿½ES */
 {
   < INICIOPROGRAMA 	: "liga" >
 | < INICIOBLOCO 	: "prepara" >
@@ -85,8 +86,6 @@ TOKEN : /* OPERADORES */
 | 	< NEGACAO		: "!=" >
 |   < IGUALIGUAL	: "==" >
 | 	< IGUAL			: "="  >
-| 	< MENORIGUAL	: "<=" >
-| 	< MAIORIGUAL	: ">=" >
 }
 
 void principal() :
@@ -95,7 +94,7 @@ void principal() :
   < INICIOPROGRAMA > < INICIOBLOCO >
 	(  declaracaoVariavel())*
 |
-	(	repeticaoFor())*
+	(	condicionalSe())* 
   < FIMBLOCO >
 }
 
@@ -118,7 +117,7 @@ void printarVariavel() :
 	Token t;
 }
 {
-    (t=< IDENTIFICADOR > { System.out.println("Este é o " + t.image); })
+    (t=< IDENTIFICADOR > { System.out.println("Este e o " + t.image); })
 }
 
 
@@ -127,7 +126,7 @@ void condicionalSe() :
 {
 }
 {
-  < IF > < ABRECHAVE > condicao()< FECHACHAVE > <ABREPAR > expressao() < FIMINSTRUCAO > < FECHAPAR > < FIMIF >
+  < IF > < ABRECHAVE > condicao()< FECHACHAVE > <ABREPAR > (expressao())* < FECHAPAR >
 }
 
 void condicao() :
@@ -141,24 +140,27 @@ void expressao() :
 {
 }
 {
-  (< IDENTIFICADOR >)+ < ATRIBUICAO > ((< IDENTIFICADOR >)+ | (< DIGITO >)+ | conta())
+  (< IDENTIFICADOR >)+ < ATRIBUICAO > ((< DIGITO >) | conta())+ < FIMINSTRUCAO >
 }
 
 void conta() :
 {
 }
 {
- ((< IDENTIFICADOR >)+ < SOMA > ((< IDENTIFICADOR >)+ | (< DIGITO >)+))
-| ((< IDENTIFICADOR >)+ < SUBTRACAO > ((< IDENTIFICADOR >)+ | (< DIGITO >)+))
-| ((< IDENTIFICADOR >)+ < MULTIPLICACAO > ((< IDENTIFICADOR >)+ | (< DIGITO >)+))
-| ((< IDENTIFICADOR >)+ < DIVISAO > ((< IDENTIFICADOR >)+ | (< DIGITO >)+))
+  ((< IDENTIFICADOR >)+ (operacao() ((< IDENTIFICADOR >)+ | (< DIGITO >)+))?)
+}
+
+void operacao():
+{}
+{
+  ( < SOMA > | < SUBTRACAO > | < MULTIPLICACAO > | < DIVISAO > )
 }
 
 void repeticaoFor()	:
 {
 }
 {
-  < FOR > (< IDENTIFICADOR >)+ < IGUAL > < DIGITO > < PARA > (< DIGITO >)+  < ABREPAR > condicao() < FIMINSTRUCAO > < FECHAPAR >
+  < FOR > (< IDENTIFICADOR >)+ < IGUAL > < DIGITO > < PARA > (< DIGITO >)+  < ABREPAR > (expressao())* < FECHAPAR >
 }
 
 
@@ -166,5 +168,5 @@ void repeticaoDo()  :
 {
 }
 {
-  < DO > < ABREPAR > expressao() < FIMINSTRUCAO > < FECHAPAR > < WHILE > <ABRECHAVE > condicao() < FECHACHAVE > <FIMINSTRUCAO >
+  < DO > < ABREPAR > (expressao())* < FECHAPAR > < WHILE > <ABRECHAVE > condicao() < FECHACHAVE > 
 }
