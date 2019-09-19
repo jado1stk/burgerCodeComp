@@ -1,0 +1,39 @@
+< pricipal >        ::= < INICIOPROGRAMA > < ABREPAR > < bloco >* < FIMPAR >
+
+< bloco >           ::= < decVariavel > | < expressao > |
+                            < condicionalSe > | < repeticaoFor > | < repeticaoDo >
+
+< decVariavel>      ::= < tipoDado > <IDENTIFICADOR > 
+                            ((< ATRIBUICAO > (< CARACTERE > | < NUMERO >)) | < empty >)
+                            <FIMINSTRUCAO >
+
+< expressao >       ::= < IDENTIFICADOR > < ATRIBUICAO > 
+                            ((< CARACTERE >)(< CARACTERE >)* | < conta > ) < FIMINSTRUCAO >
+
+< condicionalSe >   ::= < IF > < ABRECHAVE > < condicao > < FECHACHAVE >
+                            < ABREPAR > < bloco >* < FECHAPAR >
+
+< repeticaoFor >    ::= < FOR > < ABRECHAVE >(< IDENTIFICADOR >) < IGUAL > (< DIGITO > | < NUMERO >)
+                            < PARA > (< DIGITO > | < NUMERO >) < FECHACHAVE > < ABREPAR >
+                            < bloco >* < FECHAPAR >
+
+< repeticaoDo >     ::= < DO > < ABREPAR > < bloco >* < FECHAPAR >
+                            < WHILE > < ABRECHAVE > < condicao > < FECHACHAVE >
+
+< tipoDado >        ::= < REAL > | < INTEIRO > | < LETRA >
+
+< conta >           ::= < valores > ( < operacao > < valores >)*
+
+< condicao >        ::= < conta > ( < comparacao > ) < conta >
+
+< valores >         ::= < IDENTIFICADOR > | < DIGITO > | < NUMERO > | < contaComPresced >
+
+< contaComPresced > ::= < ABRECHAVE > < conta > < FECHACHAVE >
+
+< operacao >        ::= < SOMA > | < SUBTRACAO > | < MULTIPLICACAO > | < DIVISAO >
+
+< comparacao >      ::= < NEGACAO > |< IGUALIGUAL > 
+                            | < IGUAL > | < IGUALMAIOR > | < MAIOR > 
+                            | < IGUALMENOR > | < MENOR >
+
+

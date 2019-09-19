@@ -1,0 +1,14 @@
+liga(
+    xtudo cliente_0 prensou
+    xtudo cliente_1 prensou
+    hamburguer cliente_2 prensou
+
+    se { {4 - {32 - 3}} + 5 == {4 - {32 - 3}} + 5 }(
+        xsalada cliente_4 prensou
+        cliente_2 adiciona 478513 prensou
+        cliente_1 adiciona {4 - {32 - 3}} + 5 prensou
+    )
+
+    hamburguer cliente_03 prensou
+    cliente_03 adiciona ABCDEFAGJ prensou
+)
