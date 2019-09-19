@@ -96,9 +96,9 @@ TOKEN : /* OPERADORES */
 void principal() :
 {}
 {
-  < INICIOPROGRAMA > < ABREPAR >
+  < INICIOPROGRAMA > < INICIOBLOCO >
     (bloco())*
-  < FECHAPAR >
+  < FIMBLOCO >
 }
 
 void bloco() :

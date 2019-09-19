@@ -29,7 +29,7 @@ public class burgercode implements burgercodeConstants {
 
   static final public void principal() throws ParseException {
     jj_consume_token(INICIOPROGRAMA);
-    jj_consume_token(ABREPAR);
+    jj_consume_token(INICIOBLOCO);
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -48,7 +48,7 @@ public class burgercode implements burgercodeConstants {
       }
       bloco();
     }
-    jj_consume_token(FECHAPAR);
+    jj_consume_token(FIMBLOCO);
   }
 
   static final public void bloco() throws ParseException {
