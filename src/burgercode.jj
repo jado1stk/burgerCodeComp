@@ -55,11 +55,12 @@ TOKEN : /* ATRIBUI��ES */
   < INICIOPROGRAMA 	: "liga" >
 | < INICIOBLOCO 	  : "prepara" >
 | < FIMBLOCO 		    : "entrega" >
-| < REAL			      : "xtudo" >
-| < INTEIRO			    : "xsalada" >
-| < LETRA			      : "hamburguer" >
+| < REAL			      : "xsalada" >
+| < INTEIRO			    : "xburger" >
+| < LETRA			      : "xtudo" >
 | < FIMINSTRUCAO	  : "prensou" >
 | < DIGITO			    : ["0"-"9"] >
+| < DIGITO			    : "," >
 | < NUMERO 			    : (< DIGITO >)+ >
 | < CARACTERE		    : (["A"- "Z"] | ["a" - "z"]) >
 | < IDENTIFICADOR	  : "cliente_"(< CARACTERE >|< NUMERO >)+ >
@@ -109,7 +110,13 @@ void bloco() :
 void declaracaoVariavel() :
 {}
 {
-  tipoDado() <IDENTIFICADOR > (< ATRIBUICAO > (< CARACTERE > | < NUMERO >))? <FIMINSTRUCAO >
+  tipoDado() atribuiVariavel() (< VIRGULA > (atribuiVariavel()))*  <FIMINSTRUCAO >
+}
+
+void atribuiVariavel():
+{}
+{
+  <IDENTIFICADOR > (< ATRIBUICAO > (< CARACTERE > | < NUMERO >))?
 }
 
 void tipoDado() :
