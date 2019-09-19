@@ -1,12 +1,14 @@
-< pricipal >        ::= < INICIOPROGRAMA > < ABREPAR > < bloco >* < FIMPAR >
+< pricipal >        ::= < INICIOPROGRAMA > < INICIOBLOCO > < bloco >* < FIMBLOCO >
 
 < bloco >           ::= < decVariavel > | < expressao > |
                             < condicionalSe > | < repeticaoFor > | < repeticaoDo >
 
-< decVariavel>      ::= < tipoDado > <IDENTIFICADOR > 
-                            ((< ATRIBUICAO > (< CARACTERE > | < NUMERO >)) | < empty >)
+< decVariavel>      ::= < tipoDado > < atribuiVar > (< VIRGULA > < atribuiVar >)*
                             <FIMINSTRUCAO >
 
+< atribuiVar >      ::= <IDENTIFICADOR > 
+                            ((< ATRIBUICAO > (< CARACTERE > | < NUMERO >)) | < empty >)
+                            
 < expressao >       ::= < IDENTIFICADOR > < ATRIBUICAO > 
                             ((< CARACTERE >)(< CARACTERE >)* | < conta > ) < FIMINSTRUCAO >
 
