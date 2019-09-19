@@ -117,7 +117,7 @@ void declaracaoVariavel() :
 void atribuiVariavel():
 {}
 {
-  <IDENTIFICADOR > (< ATRIBUICAO > (< CARACTERE > | < NUMERO >))?
+  <IDENTIFICADOR > (< ATRIBUICAO > (< CARACTERE > | < NUMERO > | < DIGITO >))?
 }
 
 void tipoDado() :
