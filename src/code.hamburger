@@ -1,0 +1,9 @@
+liga
+prepara
+    xtudo cliente_0 prensou
+    se { cliente_0 == 2 }(
+        xsalada cliente_4 prensou
+        cliente_4 adiciona 478513 prensou
+        cliente_4 adiciona {4 - {32 - 3}} + 5 prensou
+    )
+entrega

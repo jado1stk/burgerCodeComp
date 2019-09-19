@@ -4,7 +4,7 @@
 options
 {
   static = true;
-  LOOKAHEAD = 2;
+  //LOOKAHEAD = 2;
   FORCE_LA_CHECK = true;
 }
 
@@ -59,10 +59,10 @@ TOKEN : /* ATRIBUI��ES */
 | < INTEIRO			: "xsalada" >
 | < LETRA			: "hamburguer" >
 | < FIMINSTRUCAO	: "prensou" >
-| < IDENTIFICADOR	: "cliente_"(< CARACTERE >|< DIGITO >)+ >
 | < DIGITO			: ["0"-"9"] >
 | < NUMERO 			: (< DIGITO >)+ >
 | < CARACTERE		: (["A"- "Z"] | ["a" - "z"]) >
+| < IDENTIFICADOR	: "cliente_"(< CARACTERE >|< NUMERO >)+ >
 | < ATRIBUICAO		: "adiciona" >
 | < IF				: "se" >
 | < FIMIF			: "fimse" >
@@ -92,17 +92,20 @@ void principal() :
 {}
 {
   < INICIOPROGRAMA > < INICIOBLOCO >
-	(  declaracaoVariavel())*
-|
-	(	condicionalSe())* 
+    (bloco())*
   < FIMBLOCO >
+}
+
+void bloco() :
+{}
+{
+  (( declaracaoVariavel()) | ( expressao() ) | (	condicionalSe()) | (repeticaoFor()) | (	repeticaoDo()))
 }
 
 void declaracaoVariavel() :
 {}
 {
-  tipoDado() <IDENTIFICADOR >(< ATRIBUICAO > (< CARACTERE > | < NUMERO >))?
-  <FIMINSTRUCAO >
+  tipoDado() <IDENTIFICADOR > (< ATRIBUICAO > (< CARACTERE > | < NUMERO >))? <FIMINSTRUCAO >
 }
 
 void tipoDado() :
@@ -111,7 +114,6 @@ void tipoDado() :
    < REAL > | < INTEIRO > | < LETRA >
 }
 
- 
 void printarVariavel() :
 {
 	Token t;
@@ -120,13 +122,11 @@ void printarVariavel() :
     (t=< IDENTIFICADOR > { System.out.println("Este e o " + t.image); })
 }
 
-
-
 void condicionalSe() :
 {
 }
 {
-  < IF > < ABRECHAVE > condicao()< FECHACHAVE > <ABREPAR > (expressao())* < FECHAPAR >
+  < IF > < ABRECHAVE > condicao()< FECHACHAVE > <ABREPAR > (bloco())* < FECHAPAR >
 }
 
 void condicao() :
@@ -140,15 +140,27 @@ void expressao() :
 {
 }
 {
-  (< IDENTIFICADOR >)+ < ATRIBUICAO > ((< DIGITO >) | conta())+ < FIMINSTRUCAO >
+  (< IDENTIFICADOR >) < ATRIBUICAO > ((< CARACTERE >) | conta())+ < FIMINSTRUCAO >
 }
 
 void conta() :
 {
 }
 {
-  ((< IDENTIFICADOR >)+ (operacao() ((< IDENTIFICADOR >)+ | (< DIGITO >)+))?)
+  ((valores()) (operacao() ( valores()))*) 
 }
+
+void contaComPrescendencia():
+{}
+{
+  < ABRECHAVE > conta() < FECHACHAVE >
+}
+
+void valores():
+{}
+{
+  ((< IDENTIFICADOR >) | (< DIGITO >) | (< NUMERO >) | (contaComPrescendencia()))
+} 
 
 void operacao():
 {}
@@ -160,7 +172,7 @@ void repeticaoFor()	:
 {
 }
 {
-  < FOR > (< IDENTIFICADOR >)+ < IGUAL > < DIGITO > < PARA > (< DIGITO >)+  < ABREPAR > (expressao())* < FECHAPAR >
+  < FOR > < ABRECHAVE >(< IDENTIFICADOR >)+ < IGUAL > < DIGITO > < PARA > (< DIGITO >)+ < FECHACHAVE > < ABREPAR > (bloco())* < FECHAPAR >
 }
 
 
@@ -168,5 +180,5 @@ void repeticaoDo()  :
 {
 }
 {
-  < DO > < ABREPAR > (expressao())* < FECHAPAR > < WHILE > <ABRECHAVE > condicao() < FECHACHAVE > 
+  < DO > < ABREPAR > (bloco())* < FECHAPAR > < WHILE > < ABRECHAVE > condicao() < FECHACHAVE > 
 }
