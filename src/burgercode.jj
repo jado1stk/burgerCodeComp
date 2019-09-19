@@ -91,15 +91,15 @@ TOKEN : /* OPERADORES */
 void principal() :
 {}
 {
-  < INICIOPROGRAMA > < INICIOBLOCO >
+  < INICIOPROGRAMA > < ABREPAR >
     (bloco())*
-  < FIMBLOCO >
+  < FECHAPAR >
 }
 
 void bloco() :
 {}
 {
-  (( declaracaoVariavel()) | ( expressao() ) | (	condicionalSe()) | (repeticaoFor()) | (	repeticaoDo()))
+  (( declaracaoVariavel()) | ( expressao() ) | ( condicionalSe()) | ( repeticaoFor() ) | ( repeticaoDo() ))
 }
 
 void declaracaoVariavel() :
