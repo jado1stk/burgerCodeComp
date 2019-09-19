@@ -53,39 +53,43 @@ SKIP :
 TOKEN : /* ATRIBUI��ES */
 {
   < INICIOPROGRAMA 	: "liga" >
-| < INICIOBLOCO 	: "prepara" >
-| < FIMBLOCO 		: "entrega" >
-| < REAL			: "xtudo" >
-| < INTEIRO			: "xsalada" >
-| < LETRA			: "hamburguer" >
-| < FIMINSTRUCAO	: "prensou" >
-| < DIGITO			: ["0"-"9"] >
-| < NUMERO 			: (< DIGITO >)+ >
-| < CARACTERE		: (["A"- "Z"] | ["a" - "z"]) >
-| < IDENTIFICADOR	: "cliente_"(< CARACTERE >|< NUMERO >)+ >
-| < ATRIBUICAO		: "adiciona" >
-| < IF				: "se" >
-| < FIMIF			: "fimse" >
-| < FOR				: "para" >
-| < DO				: "fazer" >
-| < WHILE			: "enquanto" >
-| < PARA			: "ate" >
-| < PRINT			: "mostra" >
+| < INICIOBLOCO 	  : "prepara" >
+| < FIMBLOCO 		    : "entrega" >
+| < REAL			      : "xtudo" >
+| < INTEIRO			    : "xsalada" >
+| < LETRA			      : "hamburguer" >
+| < FIMINSTRUCAO	  : "prensou" >
+| < DIGITO			    : ["0"-"9"] >
+| < NUMERO 			    : (< DIGITO >)+ >
+| < CARACTERE		    : (["A"- "Z"] | ["a" - "z"]) >
+| < IDENTIFICADOR	  : "cliente_"(< CARACTERE >|< NUMERO >)+ >
+| < ATRIBUICAO		  : "adiciona" >
+| < IF				      : "se" >
+| < FIMIF			      : "fimse" >
+| < FOR				      : "para" >
+| < DO				      : "fazer" >
+| < WHILE			      : "enquanto" >
+| < PARA			      : "ate" >
+| < PRINT			      : "mostra" >
 }
 
 TOKEN : /* OPERADORES */
 {
-	< SOMA 			: "+"  >
-| 	< SUBTRACAO		: "-"  >
+	  < SOMA 			    : "+"  >
+| 	< SUBTRACAO		  : "-"  >
 | 	< MULTIPLICACAO	: "*"  >
-| 	< DIVISAO		: "/"  >
-|   < ABRECHAVE		: "{"  >
-| 	< FECHACHAVE	: "}"  >
-| 	< ABREPAR		: "("  >
-| 	< FECHAPAR		: ")"  >
-| 	< NEGACAO		: "!=" >
-|   < IGUALIGUAL	: "==" >
-| 	< IGUAL			: "="  >
+| 	< DIVISAO		    : "/"  >
+|   < ABRECHAVE		  : "{"  >
+| 	< FECHACHAVE	  : "}"  >
+| 	< ABREPAR		    : "("  >
+| 	< FECHAPAR		  : ")"  >
+| 	< NEGACAO		    : "!=" >
+|   < IGUALIGUAL	  : "==" >
+| 	< IGUAL			    : "="  >
+|   < IGUALMAIOR	  : ">=" >
+| 	< MAIOR			    : ">"  >
+|   < IGUALMENOR	  : "<=" >
+| 	< MENOR			    : "<"  >
 }
 
 void principal() :
@@ -133,14 +137,20 @@ void condicao() :
 { 
 }
 {
-  (< IDENTIFICADOR >)+ (< NEGACAO >|< IGUALIGUAL >) ((< IDENTIFICADOR >)+ | (< DIGITO >)+)
+  (conta()) (comparacao()) (conta()) 
+}
+
+void comparacao() :
+{}
+{
+  < NEGACAO > |< IGUALIGUAL > | < IGUAL > | < IGUALMAIOR > | < MAIOR > | < IGUALMENOR > | < MENOR >
 }
 
 void expressao() :
 {
 }
 {
-  (< IDENTIFICADOR >) < ATRIBUICAO > ((< CARACTERE >) | conta())+ < FIMINSTRUCAO >
+  (< IDENTIFICADOR >) < ATRIBUICAO > ((< CARACTERE >)+ | conta()) < FIMINSTRUCAO >
 }
 
 void conta() :
@@ -172,7 +182,7 @@ void repeticaoFor()	:
 {
 }
 {
-  < FOR > < ABRECHAVE >(< IDENTIFICADOR >)+ < IGUAL > < DIGITO > < PARA > (< DIGITO >)+ < FECHACHAVE > < ABREPAR > (bloco())* < FECHAPAR >
+  < FOR > < ABRECHAVE >(< IDENTIFICADOR >)+ < IGUAL > (< DIGITO > | < NUMERO >) < PARA > (< DIGITO > | < NUMERO >) < FECHACHAVE > < ABREPAR > (bloco())* < FECHAPAR >
 }
 
 

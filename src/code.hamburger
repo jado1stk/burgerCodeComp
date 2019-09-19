@@ -3,7 +3,7 @@ liga(
     xtudo cliente_1 prensou
     hamburguer cliente_2 prensou
 
-    se { cliente_0 == 2 }(
+    se { {4 - {32 - 3}} + 5 == {4 - {32 - 3}} + 5 }(
         xsalada cliente_4 prensou
         cliente_2 adiciona 478513 prensou
         cliente_1 adiciona {4 - {32 - 3}} + 5 prensou
