@@ -52,26 +52,26 @@ SKIP :
 
 TOKEN : /* ATRIBUI��ES */
 {
-  < INICIOPROGRAMA 	: "liga" >
-| < INICIOBLOCO 	  : "prepara" >
+  < INICIOPROGRAMA 		: "liga" >
+| < INICIOBLOCO 	    : "prepara" >
 | < FIMBLOCO 		    : "entrega" >
-| < REAL			      : "xsalada" >
+| < REAL			    : "xsalada" >
 | < INTEIRO			    : "xburger" >
-| < LETRA			      : "xtudo" >
-| < FIMINSTRUCAO	  : "prensou" >
+| < LETRA			    : "xtudo" >
+| < FIMINSTRUCAO	    : "prensou" >
 | < DIGITO			    : ["0"-"9"] >
-| < DIGITO			    : "," >
+| < VIRGULA			    : "," >
 | < NUMERO 			    : (< DIGITO >)+ >
 | < CARACTERE		    : (["A"- "Z"] | ["a" - "z"]) >
-| < IDENTIFICADOR	  : "cliente_"(< CARACTERE >|< NUMERO >)+ >
-| < ATRIBUICAO		  : "adiciona" >
-| < IF				      : "se" >
-| < FIMIF			      : "fimse" >
-| < FOR				      : "para" >
-| < DO				      : "fazer" >
-| < WHILE			      : "enquanto" >
-| < PARA			      : "ate" >
-| < PRINT			      : "mostra" >
+| < IDENTIFICADOR	    : "cliente_"(< CARACTERE >|< NUMERO >)+ >
+| < ATRIBUICAO		  	: "adiciona" >
+| < IF				    : "tacomfome?" >
+| < FIMIF			    : "fimse" >
+| < FOR				    : "saboreando" >
+| < DO				    : "fazer" >
+| < WHILE			    : "enquanto" >
+| < PARA			    : "ate" >
+| < PRINT			    : "mostra" >
 }
 
 TOKEN : /* OPERADORES */
