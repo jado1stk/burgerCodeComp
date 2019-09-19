@@ -61,7 +61,7 @@ TOKEN : /* ATRIBUI��ES */
 | < FIMINSTRUCAO	    : "prensou" >
 | < DIGITO			    : ["0"-"9"] >
 | < VIRGULA			    : "," >
-| < NUMERO 			    : (< DIGITO >)+ >
+| < NUMERO 			    : (< DIGITO >)+ (< VIRGULA >)? (< DIGITO >)* >
 | < CARACTERE		    : (["A"- "Z"] | ["a" - "z"]) >
 | < IDENTIFICADOR	    : "cliente_"(< CARACTERE >|< NUMERO >)+ >
 | < ATRIBUICAO		  	: "adiciona" >
@@ -71,25 +71,25 @@ TOKEN : /* ATRIBUI��ES */
 | < DO				    : "fazer" >
 | < WHILE			    : "enquanto" >
 | < PARA			    : "ate" >
-| < PRINT			    : "mostra" >
+| < PRINT			    : "cardapio" >
 }
 
 TOKEN : /* OPERADORES */
 {
-	  < SOMA 			    : "+"  >
-| 	< SUBTRACAO		  : "-"  >
-| 	< MULTIPLICACAO	: "*"  >
+	< SOMA 				: "+"  >
+| 	< SUBTRACAO		    : "-"  >
+| 	< MULTIPLICACAO		: "*"  >
 | 	< DIVISAO		    : "/"  >
-|   < ABRECHAVE		  : "{"  >
-| 	< FECHACHAVE	  : "}"  >
+|   < ABRECHAVE		 	: "{"  >
+| 	< FECHACHAVE	  	: "}"  >
 | 	< ABREPAR		    : "("  >
-| 	< FECHAPAR		  : ")"  >
+| 	< FECHAPAR		  	: ")"  >
 | 	< NEGACAO		    : "!=" >
-|   < IGUALIGUAL	  : "==" >
+|   < IGUALIGUAL	  	: "==" >
 | 	< IGUAL			    : "="  >
-|   < IGUALMAIOR	  : ">=" >
+|   < IGUALMAIOR	  	: ">=" >
 | 	< MAIOR			    : ">"  >
-|   < IGUALMENOR	  : "<=" >
+|   < IGUALMENOR	  	: "<=" >
 | 	< MENOR			    : "<"  >
 }
 

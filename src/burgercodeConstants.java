@@ -108,7 +108,7 @@ public interface burgercodeConstants {
     "\"fazer\"",
     "\"enquanto\"",
     "\"ate\"",
-    "\"mostra\"",
+    "\"cardapio\"",
     "\"+\"",
     "\"-\"",
     "\"*\"",
