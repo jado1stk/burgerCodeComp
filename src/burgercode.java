@@ -29,7 +29,7 @@ public class burgercode implements burgercodeConstants {
 
   static final public void principal() throws ParseException {
     jj_consume_token(INICIOPROGRAMA);
-    jj_consume_token(ABREPAR);
+    jj_consume_token(INICIOBLOCO);
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -48,7 +48,7 @@ public class burgercode implements burgercodeConstants {
       }
       bloco();
     }
-    jj_consume_token(FECHAPAR);
+    jj_consume_token(FIMBLOCO);
   }
 
   static final public void bloco() throws ParseException {
@@ -107,6 +107,9 @@ public class burgercode implements burgercodeConstants {
         break;
       case NUMERO:
         jj_consume_token(NUMERO);
+        break;
+      case DIGITO:
+        jj_consume_token(DIGITO);
         break;
       default:
         jj_la1[3] = jj_gen;
@@ -417,10 +420,10 @@ public class burgercode implements burgercodeConstants {
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x350700,0x350700,0x2000,0xc000,0x20000,0x700,0x350700,0x0,0x8000,0x2001d000,0x1e000000,0x20015000,0x1e000000,0x10000,0x5000,0x5000,0x350700,0x350700,};
+      jj_la1_0 = new int[] {0x6a0e00,0x6a0e00,0x4000,0x1a000,0x40000,0xe00,0x6a0e00,0x0,0x10000,0x4003a000,0x3c000000,0x4002a000,0x3c000000,0x20000,0xa000,0xa000,0x6a0e00,0x6a0e00,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xfe,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1fc,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -558,7 +561,7 @@ public class burgercode implements burgercodeConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[40];
+    boolean[] la1tokens = new boolean[41];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -575,7 +578,7 @@ public class burgercode implements burgercodeConstants {
         }
       }
     }
-    for (int i = 0; i < 40; i++) {
+    for (int i = 0; i < 41; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
