@@ -67,7 +67,6 @@ TOKEN : /* ATRIBUI��ES */
 | < IDENTIFICADOR	    : "cliente_"(< CARACTERE >|< NUMERO >)+ >
 | < ATRIBUICAO		  	: "adiciona" >
 | < IF				    : "tacomfome?" >
-| < FIMIF			    : "fimse" >
 | < FOR				    : "saboreando" >
 | < DO				    : "fazer" >
 | < WHILE			    : "enquanto" >

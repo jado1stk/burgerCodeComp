@@ -1,14 +1,29 @@
-liga(
+liga prepara
     xtudo cliente_0 prensou
     xtudo cliente_1 prensou
-    hamburguer cliente_2 prensou
+    xburger cliente_2 prensou
 
-    se { {4 - {32 - 3}} + 5 == {4 - {32 - 3}} + 5 }(
+    tacomfome? { {4 - {32 - 3}} + 5 == {4 - {32 - 3}} + 5 }(
         xsalada cliente_4 prensou
         cliente_2 adiciona 478513 prensou
         cliente_1 adiciona {4 - {32 - 3}} + 5 prensou
+        
+        tacomfome? { {4 - {32 - 3}} + 5 == {4 - {32 - 3}} + 5 }(
+            xsalada cliente_4 prensou
+            cliente_2 adiciona 478513 prensou
+            cliente_1 adiciona {4 - {32 - 3}} + 5 prensou
+        )
     )
     
-    hamburguer cliente_03 prensou
+    saboreando {cliente_4 = 3 ate 10}
+    (
+        cliente_0 adiciona 2 prensou
+    )
+
+    fazer(
+        cliente_0 adiciona 2 prensou
+    )enquanto{cliente_0 == 1}
+
+    xburger cliente_03 prensou
     cliente_03 adiciona ABCDEFAGJ prensou
-)
+entrega
